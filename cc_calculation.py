@@ -44,12 +44,10 @@ im2_convert.save('rectangle.png')
 pix_val_ellipse = []
 
  # Create n copies of the images, add noise, extract and store pixel values
+image1 = io.imread('ellipse.png',pilmode="L")
+ 
 for n in range(10):
-    image1 = io.imread('ellipse.png',pilmode="L")
-    random_nr = numpy.random.poisson(lam=1.0, size=None)
-    
-    # Ask about this line: how to make the images "noisier"?
-    noise_ellipse = image1 + random_nr*image1.std()*np.random.random(image1.shape)
+    noise_ellipse = image1 + numpy.random.poisson(lam=image1, size=None) 
     noisy_img_ellipse = Image.fromarray(noise_ellipse)
     
     if noisy_img_ellipse.mode != 'RGB':
@@ -72,12 +70,10 @@ pix_val_rectangle = []
 
 # n = nr of images to produce
 
+image2 = io.imread('rectangle.png',pilmode="L")
 
 for n in range(10): 
-    image2 = io.imread('rectangle.png',pilmode="L")
-    random_nr = numpy.random.poisson(lam=1.0, size=None) # lam should be input image
-    # noise_rectangle = numpy.random.poisson
-    noise_rectangle = image2 + random_nr*image2.std()*np.random.random(image2.shape)
+    noise_rectangle = image2 + numpy.random.poisson(lam=image2, size=None) 
     noisy_img_rectangle = Image.fromarray(noise_rectangle)
     
     if noisy_img_rectangle.mode != 'RGB':
