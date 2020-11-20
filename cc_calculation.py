@@ -135,35 +135,23 @@ plt.show()
 
 
 
-# Write cc values on infile.txt. 
+# Need help here! Write cc values on infile.txt. 
+# We want column 1 and column 2 to be numbers 1-20 (depending on nr of images) so that all are compared to each other.
+# Column 3 should contain the correlation coefficients. 
 import numpy as np
 
-# col1_array is numbers in cc_data but have to add more to get 
-# everything in cc_matrix
-# Has to be changed with the nr of images
-# Currently working on this!
-
+# Test with random numbers
 col1_array = numpy.arange(start=1, stop=21, step=1)
-
-# col2_array is what col1_array should be compared with
-# acc to cc_matrix
-
 col2_array = numpy.arange(start=1, stop=21, step=1)
-
-# col3_array = correlation coefficients
 col3_array = numpy.arange(start=1, stop=21, step=1)
-#here is your data, in two numpy arrays
 
 infile_data = np.array([col1_array, col2_array, col3_array])
 infile_data = infile_data.T
-#here you transpose your data, so to have it in two columns
 
 datafile_path = "infile.txt"
 with open(datafile_path, 'w+') as datafile_id:
-#here you open the ascii file
 
     np.savetxt(datafile_id, infile_data, fmt=['%d','%d', '%d'])
-    #here the ascii file is written. 
 
 
 
