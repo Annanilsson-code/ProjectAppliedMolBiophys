@@ -44,8 +44,9 @@ im2_convert.save('rectangle.png')
 pix_val_ellipse = []
 
  # Create n copies of the images, add noise, extract and store pixel values
-image1 = io.imread('ellipse.png',pilmode="L")
  
+image1 = io.imread('ellipse.png',pilmode="L")
+
 for n in range(10):
     noise_ellipse = image1 + numpy.random.poisson(lam=image1, size=None) 
     noisy_img_ellipse = Image.fromarray(noise_ellipse)
@@ -73,6 +74,10 @@ pix_val_rectangle = []
 image2 = io.imread('rectangle.png',pilmode="L")
 
 for n in range(10): 
+    # random_nr = numpy.random.poisson(lam=image2, size=None) # lam should be input image
+    # noise_rectangle = numpy.random.poisson
+    # noise_rectangle = image2 + random_nr*image2.std()*np.random.random(image2.shape)
+    # noisy_img_rectangle = Image.fromarray(noise_rectangle)
     noise_rectangle = image2 + numpy.random.poisson(lam=image2, size=None) 
     noisy_img_rectangle = Image.fromarray(noise_rectangle)
     
@@ -100,18 +105,17 @@ chunks_rectangle = [pix_val_rectangle_flat[x:x+450000] for x in range(0, len(pix
 import pandas as pd
 import seaborn as sn
 
-# Any more efficient way to write this?
-# Keep everything in a single np array
+# QUESTION: S.O.S!!! How exactly can we keep this in a single np array?
 cc_data = {'1': chunks_rectangle[0],
-           '2': chunks_rectangle[1],
-           '3': chunks_rectangle[2],
-           '4': chunks_rectangle[3],
-           '5': chunks_rectangle[4],
-           '6': chunks_rectangle[5],
-           '7': chunks_rectangle[6],
-           '8': chunks_rectangle[7],
-           '9': chunks_rectangle[8],
-           '10': chunks_rectangle[9],
+            '2': chunks_rectangle[1],
+            '3': chunks_rectangle[2],
+            '4': chunks_rectangle[3],
+            '5': chunks_rectangle[4],
+            '6': chunks_rectangle[5],
+            '7': chunks_rectangle[6],
+            '8': chunks_rectangle[7],
+            '9': chunks_rectangle[8],
+            '10': chunks_rectangle[9],
             '11': chunks_ellipse[0],
             '12': chunks_ellipse[1],
             '13': chunks_ellipse[2],
@@ -134,26 +138,48 @@ sn.heatmap(cc_matrix, annot=True)
 plt.show()
 
 
+# Prepare infile
+# set() gets all possible pairs between x1-x4
+pairs_to_drop = set()
 
-# Need help here! Write cc values on infile.txt. 
-# We want column 1 and column 2 to be numbers 1-20 (depending on nr of images) so that all are compared to each other.
-# Column 3 should contain the correlation coefficients. 
-import numpy as np
+# get_all_pairs(df) goes through the matrix and returns all
+# possible pairs between the objects. 
+def get_all_pairs(df):
+    cols = df.columns
+    for i in range(0, df.shape[1]):
+        for j in range(0, i+1):
+            pairs_to_drop.add((cols[i], cols[j]))
+    return pairs_to_drop
 
-# Test with random numbers
-col1_array = numpy.arange(start=1, stop=21, step=1)
-col2_array = numpy.arange(start=1, stop=21, step=1)
-col3_array = numpy.arange(start=1, stop=21, step=1)
+# This function returns all correlations between all the items
+# EXCEPT for correlations between the SAME items, x1-x1 etc
+# n = nr of images in each dataset
+def get_all_correlations(df, n=10):
+    au_corr = df.corr().unstack(level=0)
+    labels_to_drop = get_all_pairs(df)
+    au_corr = au_corr.drop(labels=labels_to_drop).sort_values(ascending=False)
+    return au_corr[0:n]    
 
-infile_data = np.array([col1_array, col2_array, col3_array])
-infile_data = infile_data.T
+corr_pairs = get_all_pairs(df) 
+table_cc = get_all_correlations(df, 210) # Should be 210 cc's but we only get 190 because no objects are compared with themselves. 
 
-datafile_path = "infile.txt"
-with open(datafile_path, 'w+') as datafile_id:
-
-    np.savetxt(datafile_id, infile_data, fmt=['%d','%d', '%d'])
+print("All correlations")
+print(table_cc.to_string())
 
 
+# Write to infile.txt
+# QUESTION: the cc values in table_cc are of type float64 and when written to 
+# a file, they change (but are close to the true values in table_cc).
+# Is there any way to prevent that float64's change when 
+# writing them to a file?
 
+# Sort what is written to infile? 
+f = open("infile.txt", "w")
+print(table_cc.to_string(), file=f) 
+
+# QUESTION: In the infile, we need to fill in with image numbers in col 1.
+# How can we fix this?
+# Only gives us 190 cc's. Should be 210 if we also compare images with themselves.
+# Perhaps we need to add this in the infile. 
 
     
