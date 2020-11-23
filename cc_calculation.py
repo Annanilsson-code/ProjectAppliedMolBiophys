@@ -39,8 +39,18 @@ data2 = 'rectangle_notconverted.png'
 im2_convert = Image.open('rectangle_notconverted.png', 'r').convert('LA')
 im2_convert.save('rectangle.png')
  
-
+-----------------------------------------------------------
 # HERE IS THE NEW CODE :D
+
+# Question: Increasing the nr of images from 10 to for example 50 doesn't work and gives the error message down below.
+# Seems like things can't be read from the infile. What's the reason for that? I tried to write everything tab separated but still encountered the same error. 
+
+# File "C:\Users\Anna\Tillämpad molekylär biofysik\cc_analysis.py", line 330, in <module>
+    #dataset_a_num, dataset_b_num, pairwise_cc = line.split()
+
+#ValueError: not enough values to unpack (expected 3, got 1)
+ ----------------------------------------------------------
+ 
 # Create n noisy images of each geometric figure
 
 n = 10
@@ -78,10 +88,9 @@ f = open("infile.txt", "w")
 
 for i in range(0, cc_matrix.shape[1]):
     for j in range(0, i+1):
-            print(i+1, j+1, cc_matrix[i,j], file=f)
+            print(i+1,'\t', j+1, '\t', cc_matrix[i,j], file=f)
             
-            
-            
+                        
             
             
             
