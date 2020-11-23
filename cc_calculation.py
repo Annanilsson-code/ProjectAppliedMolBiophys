@@ -42,13 +42,14 @@ im2_convert.save('rectangle.png')
 -----------------------------------------------------------
 # HERE IS THE NEW CODE :D
 
-# Question: Increasing the nr of images from 10 to for example 50 doesn't work and gives the error message down below.
-# Seems like things can't be read from the infile. What's the reason for that? I tried to write everything tab separated but still encountered the same error. 
+# Question: in some places the infile turns out to look like this, I don't understand why. 
 
-# File "C:\Users\Anna\Tillämpad molekylär biofysik\cc_analysis.py", line 330, in <module>
-    #dataset_a_num, dataset_b_num, pairwise_cc = line.split()
+# 20 	 20 	 1.0
+#	  0.5720418816716809
+# 21 	 4 	 0.5671628322987669
 
-#ValueError: not enough values to unpack (expected 3, got 1)
+# This gives the error message "expected 3 values, got 1". Could it be something wrong with the for-loop in which the cc's are written to the infile?
+
  ----------------------------------------------------------
  
 # Create n noisy images of each geometric figure
