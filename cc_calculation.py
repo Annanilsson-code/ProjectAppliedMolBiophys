@@ -91,7 +91,7 @@ for i in range(0, cc_matrix.shape[1]):
 
 
 
-# THE PREVIOUS CODE. 
+# THE OLD CODE.
 
 # pix_val_ellipse = []
 
