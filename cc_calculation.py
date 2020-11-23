@@ -39,19 +39,8 @@ data2 = 'rectangle_notconverted.png'
 im2_convert = Image.open('rectangle_notconverted.png', 'r').convert('LA')
 im2_convert.save('rectangle.png')
  
------------------------------------------------------------
-# HERE IS THE NEW CODE :D
 
-# Question: in some places the infile turns out to look like this, I don't understand why. 
-
-# 20 	 20 	 1.0
-#	  0.5720418816716809
-# 21 	 4 	 0.5671628322987669
-
-# This gives the error message "expected 3 values, got 1". Could it be something wrong with the for-loop in which the cc's are written to the infile?
-
- ----------------------------------------------------------
- 
+# The new code 
 # Create n noisy images of each geometric figure
 
 n = 10
