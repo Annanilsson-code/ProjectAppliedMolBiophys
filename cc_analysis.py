@@ -686,3 +686,11 @@ print(textwrap.dedent("""\
       """).format(args.dim),
       file=sys.stderr, flush=True)
 
+
+
+
+# --------------------------------------------------------------------
+# DOWN BELOW IS CODE WE HAVE ADDED
+# Save rep_mat to results.txt
+import numpy as np
+np.savetxt('results.txt', rep_mat, delimiter='\t')
