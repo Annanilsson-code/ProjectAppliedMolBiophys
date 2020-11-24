@@ -16,7 +16,7 @@ x = d[0:len(d),0]
 y = d[0:len(d),1]
 
 plt.scatter(x,y, c='cyan')
-plt.title('Scatter plot, correlation separation of images in dataset')
-plt.xlabel('Dimension 1')
-plt.ylabel('Dimension 2')
+plt.title('n = ...')
+plt.xlabel('x')
+plt.ylabel('y')
 plt.show()
