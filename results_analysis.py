@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 
 d = np.loadtxt('results.txt', delimiter="\t")
 
-x = d[0:20,0]
-y = d[0:20,1]
+x = d[0:len(d),0]
+y = d[0:len(d),1]
 
 plt.scatter(x,y, c='cyan')
 plt.title('Scatter plot, correlation separation of images in dataset')
