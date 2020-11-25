@@ -43,33 +43,28 @@ im2_convert.save('rectangle.png')
 # The new code 
 # Create n noisy images of each geometric figure
 
-n = 10
+n = 5
 image1 = io.imread('ellipse.png',pilmode="L")
 image2 = io.imread('rectangle.png',pilmode="L")
+# image3 = io.imread('square.png', pilmode="L")
 
+image_matrix = np.concatenate((image1, image2), axis = 1)   # horizontal image matrix
 
 # Store the noise in 3D matrices
-
-noise_ellipse = np.zeros((n,image1.shape[0], image1.shape[1]))
-noise_rectangle = np.zeros((n,image2.shape[0], image2.shape[1]))
-    
+noise = np.zeros((n,image_matrix.shape[0], image_matrix.shape[1]))
 
 # Add the noise
 
 for i in range(n):
-    noise_ellipse[i] = numpy.random.poisson(image1)
-    noise_rectangle[i] = numpy.random.poisson(image2)
-
+    noise[i] = numpy.random.poisson(image_matrix)
 
 # Reshape the 3D matrices
-
-reshaped1 = noise_ellipse.reshape((n,-1))
-reshaped2 = noise_rectangle.reshape((n,-1))
-
+reshaped_matrix = noise.reshape((n,-1)) # (n, 150'000
 
 # Calculate correlation coefficient matrix
 
-cc_matrix = numpy.corrcoef(reshaped1, reshaped2)
+# You should put all images in one matrix and call corrcoef on it.
+cc_matrix = numpy.corrcoef(reshaped_matrix)
 
 
 # Print to infile
