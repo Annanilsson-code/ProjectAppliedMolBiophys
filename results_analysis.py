@@ -31,5 +31,5 @@ scatter = ax.scatter(a, b, c=classes, s=scale)
 legend1 = ax.legend(*scatter.legend_elements(),
                     loc="upper left", title="Classes")
 ax.add_artist(legend1)
-
+plt.title('Correlation separation in images')
 plt.show()
