@@ -13,18 +13,23 @@ import matplotlib.pyplot as plt
 
 d = np.loadtxt('results.txt', delimiter="\t")
 
-a = d[0:len(d),0]
-b = d[0:len(d),1]
+x = d[0:len(d),0]  
+y = d[0:len(d),1]
 
-fig, ax = plt.subplots()
+n = 5    # n has to be changed so it has half the length of x and y
+classes = [] 
 
-for color in ['tab:blue', 'tab:orange']:
-    n = len(d)
-    scale = 200.0 * np.random.rand(n)
-    ax.scatter(a, b, c=color, s=scale, label=color)
+for i in range(n):
+    classes.append(0)
 
-ax.legend()
-ax.grid(True)
+for i in range(n):
+    classes.append(1)
+    
+scale = 50
+color = np.array(["black", "green"])
+plt.scatter(x,y, c=color[classes], s=scale)
 
 plt.title('Correlation separation in images')
+plt.xlabel('x')
+plt.ylabel('y')
 plt.show()
