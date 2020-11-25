@@ -5,6 +5,7 @@ Created on Sat Nov 21 16:52:08 2020
 @author: Anna
 """
 import numpy as np
+np.random.seed(0)
 import matplotlib.pyplot as plt
 
 # This script evaluates the result of cc_analysis.py
@@ -12,11 +13,18 @@ import matplotlib.pyplot as plt
 
 d = np.loadtxt('results.txt', delimiter="\t")
 
-x = d[0:len(d),0]
-y = d[0:len(d),1]
+a = d[0:len(d),0]
+b = d[0:len(d),1]
 
-plt.scatter(x,y, c='cyan')
-plt.title('n = ...')
-plt.xlabel('x')
-plt.ylabel('y')
+fig, ax = plt.subplots()
+
+for color in ['tab:blue', 'tab:orange']:
+    n = len(d)
+    scale = 200.0 * np.random.rand(n)
+    ax.scatter(a, b, c=color, s=scale, label=color)
+
+ax.legend()
+ax.grid(True)
+
+plt.title('Correlation separation in images')
 plt.show()
