@@ -80,11 +80,16 @@ for i in range(0, cc_matrix.shape[1]):
     for j in range(0, i+1):
             print(i+1,'\t', j+1, '\t', cc_matrix[i,j], file=f)
             
-                        
+                                   
             
-            
-            
-            
+# Create vector for the scatter plot
+classes = []
+
+for i in range(n):
+    classes.append(0)
+
+for i in range(n):
+    classes.append(1)
             
             
 
