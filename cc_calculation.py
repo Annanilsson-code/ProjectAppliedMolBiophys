@@ -59,7 +59,7 @@ for i in range(n):
     noise[i] = numpy.random.poisson(image_matrix)
 
 # Reshape the 3D matrices
-reshaped_matrix = noise.reshape((n,-1)) # (n, 150'000
+reshaped_matrix = noise.reshape((n,-1))
 
 # Calculate correlation coefficient matrix
 
