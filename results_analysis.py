@@ -5,19 +5,16 @@ Created on Sat Nov 21 16:52:08 2020
 @author: Anna
 """
 import numpy as np
-np.random.seed(0)
 import matplotlib.pyplot as plt
 
-# This script evaluates the result of cc_analysis.py
-# Vectors are saved in results.txt
-
 d = np.loadtxt('results.txt', delimiter="\t")
+N = len(d)
 
-x = d[0:len(d),0]  
-y = d[0:len(d),1]
+a = d[0:len(d),0]
+b = d[0:len(d),1]
 
-n = 5    # n has to be changed so it has half the length of x and y
-classes = [] 
+n = 5
+classes = []   
 
 for i in range(n):
     classes.append(0)
@@ -26,10 +23,13 @@ for i in range(n):
     classes.append(1)
     
 scale = 50
-color = np.array(["black", "green"])
-plt.scatter(x,y, c=color[classes], s=scale)
 
-plt.title('Correlation separation in images')
-plt.xlabel('x')
-plt.ylabel('y')
+fig, ax = plt.subplots()
+scatter = ax.scatter(a, b, c=classes, s=scale)
+
+# produce a legend with the unique colors from the scatter
+legend1 = ax.legend(*scatter.legend_elements(),
+                    loc="upper left", title="Classes")
+ax.add_artist(legend1)
+
 plt.show()
