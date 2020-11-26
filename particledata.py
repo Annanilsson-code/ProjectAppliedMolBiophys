@@ -14,8 +14,8 @@ import mrcfile
 # import cryo em data set for cc analysis
 
 
-mrc = mrcfile.open('FoilHole_3164980_Data_3165536_3165537_20190104_1142-60848.mrcs')
-   
+with mrcfile.open('FoilHole_3164980_Data_3165536_3165537_20190104_1142-60848.mrcs') as mrc:
+   mrc.data[]
 
 
 n = 10 #len(cryodata)
