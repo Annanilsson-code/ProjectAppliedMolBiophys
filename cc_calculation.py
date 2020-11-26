@@ -43,32 +43,35 @@ im2_convert.save('rectangle.png')
 # The new code 
 # Create n noisy images of each geometric figure
 
-n = 5
-image1 = io.imread('ellipse.png',pilmode="L")
-image2 = io.imread('rectangle.png',pilmode="L")
-# image3 = io.imread('square.png', pilmode="L")
+# Create n noisy images of each geometric figure
+ # Create n noisy images
 
-image_matrix = np.concatenate((image1, image2), axis = 1)   # horizontal image matrix
+n = 10
+nclasses = 2
 
-# Store the noise in 3D matrices
-noise = np.zeros((n,image_matrix.shape[0], image_matrix.shape[1]))
+# Store the images in a matrix directly when importing them.
+images = [io.imread('ellipse.png',pilmode="L"), io.imread('rectangle.png',pilmode="L")]
 
-# Add the noise
+# Store the noise in 3D matrix
+noisy_images = np.zeros((n,images[0].shape[0], images[0].shape[1]))
+classes = np.zeros((n))
+
+# Calculate noise 
 
 for i in range(n):
-    noise[i] = numpy.random.poisson(image_matrix)
+  c = np.random.randint(0,nclasses)
+  noisy_images[i] = np.random.poisson(images[c])
+  classes[i] = c
 
-# Reshape the 3D matrices
-reshaped_matrix = noise.reshape((n,-1))
+np.save('classes.npy',classes)
+
 
 # Calculate correlation coefficient matrix
 
 # You should put all images in one matrix and call corrcoef on it.
-cc_matrix = numpy.corrcoef(reshaped_matrix)
-
+cc_matrix = numpy.corrcoef(noisy_images.reshape(n,-1))
 
 # Print to infile
-
 f = open("infile.txt", "w")
 
 for i in range(0, cc_matrix.shape[1]):
@@ -76,16 +79,7 @@ for i in range(0, cc_matrix.shape[1]):
             print(i+1,'\t', j+1, '\t', cc_matrix[i,j], file=f)
             
                                    
-            
-# Create vector for the scatter plot
-classes = []
-
-for i in range(n):
-    classes.append(0)
-
-for i in range(n):
-    classes.append(1)
-            
+        
             
 
 
