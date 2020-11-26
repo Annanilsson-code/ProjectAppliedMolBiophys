@@ -12,7 +12,7 @@ d = np.loadtxt('results.txt', delimiter="\t")   # d = (n,2)
 a = d[0:len(d),0]
 b = d[0:len(d),1]
 
-from cc_calculation import classes
+classes = np.load('classes.npy')
     
 scale = 50
 
