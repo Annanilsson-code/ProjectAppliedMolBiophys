@@ -43,9 +43,6 @@ im2_convert.save('rectangle.png')
 # The new code 
 # Create n noisy images of each geometric figure
 
-# Create n noisy images of each geometric figure
- # Create n noisy images
-
 n = 10
 nclasses = 2
 
@@ -62,8 +59,8 @@ for i in range(n):
   c = np.random.randint(0,nclasses)
   noisy_images[i] = np.random.poisson(images[c])
   classes[i] = c
-
-np.save('classes.npy',classes)
+  
+np.save('classes.npy',classes)     # The .npy format is the standard binary file format in NumPy for persisting a single arbitrary NumPy array on disk. 
 
 
 # Calculate correlation coefficient matrix
