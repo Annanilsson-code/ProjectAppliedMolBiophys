@@ -12,16 +12,7 @@ d = np.loadtxt('results.txt', delimiter="\t")   # d = (n,2)
 a = d[0:len(d),0]
 b = d[0:len(d),1]
 
-# from cc_calculation import classes
-
-n_half = 25    # Needs to be of size n/2 because n/2 + n/2 = classes = n and x and y are n?
-classes = []
-
-for i in range(n_half):
-    classes.append(0)
-
-for i in range(n_half):
-    classes.append(1)
+from cc_calculation import classes
     
 scale = 50
 
