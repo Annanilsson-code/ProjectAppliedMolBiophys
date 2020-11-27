@@ -1,10 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 26 13:21:14 2020
 
-@author: ylvjan
-"""
 import numpy as np
 from skimage import io 
 from PIL import Image, ImageDraw
@@ -45,9 +39,7 @@ draw.polygon((150, 100, 250, 200, 350, 100), 255)
 im.save('triangle.png', quality=95)
 del draw, im
 
-
-# Create n noisy images
-n = 100
+n = 100 # Create n noisy images
 nclasses = 2
 # images = [io.imread('ellipse.png',pilmode="L"), io.imread('rectangle.png',pilmode="L")]
 images = [io.imread('ellipse.png',pilmode="L"), io.imread('circle.png',pilmode="L")]
@@ -55,22 +47,20 @@ images = [io.imread('ellipse.png',pilmode="L"), io.imread('circle.png',pilmode="
 # images = [io.imread('triangle.png',pilmode="L"), io.imread('rectangle.png',pilmode="L")]
 # images = [io.imread('romb.png',pilmode="L"), io.imread('triangle.png',pilmode="L")]
 
-# Store the noise in 3D matrices
 noisy_images = np.zeros((n,images[0].shape[0], images[0].shape[1]))
 classes = np.zeros((n))
 
-# Calculate noisy images the noise
-
+# add noise
 for i in range(n):
   c = np.random.randint(0, nclasses)
   noisy_images[i] = np.random.poisson(images[c]*0.001)
   classes[i] = c
-
 np.save('classes.npy',classes)
 
-# Calculate correlation coefficient matrix
+# Calculate cc matrix
 cc_matrix = np.corrcoef(noisy_images.reshape(n,-1))
 
+#save to file
 file = open("cc_file.txt", "w")
 for i in range(0, cc_matrix.shape[1]):
     for j in range(0, i+1):
