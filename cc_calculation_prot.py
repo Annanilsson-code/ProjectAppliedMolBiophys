@@ -49,6 +49,8 @@ noise_x_reshaped = noise_x.reshape(n,-1)    # (1, 42800)
 noise_y_reshaped = noise_y.reshape(n,-1) 
 noise_z_reshaped = noise_z.reshape(n,-1) 
 
+# Add the noise on top of the signal.
+
 # Make histogram of the noise. Could do the same for y and z axes.
 np.histogram(noise_x_reshaped, bins = 'auto')
 hist, bins = np.histogram(noise_x_reshaped, bins = 'auto')
