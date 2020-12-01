@@ -31,9 +31,9 @@ B_channel = 0
 for i in range(len(pathDir)):  
     filename = pathDir[i]
     # img = imageio.imread(os.path.join(filepath, filename))      #Have no images to read yet!
-    R_channel = R_channel + np.sum(img[:,:,0])
+    R_channel = R_channel + np.sum(img[:,:,2])
     G_channel = G_channel + np.sum(img[:,:,1])
-    B_channel = B_channel + np.sum(img[:,:,2])
+    B_channel = B_channel + np.sum(img[:,:,0])
     
 num = len(pathDir) # *size of the matrix, i.e. *300*500
 R_mean = R_channel/num
