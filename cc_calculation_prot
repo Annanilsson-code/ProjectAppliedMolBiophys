@@ -18,6 +18,14 @@ import imageio    # use imageio.imread instead of scipy.misc
 filepath = "C:/Users/Anna/AppliedMolBiophys/mrc_files"
 pathDir = os.listdir(filepath)  
 
+#Simple way with just a couple of images. 
+mrc1 = mrcfile.mmap('FoilHole_3164980_Data_3165536_3165537_20190104_1142-60848.mrcs', mode='r+')
+mrc2 = mrcfile.mmap('FoilHole_3164980_Data_3165619_3165620_20190104_1143-60849.mrcs', mode='r+') 
+
+#Put the mrc files in np arrays. 
+array1 = np.array(mrc1.data)
+array2 = np.array(mrc2.data)
+
 # Convert mrc files to png if the mean, std & var should be calculated pixelwise
 
 
