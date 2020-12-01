@@ -40,4 +40,4 @@ R_mean = R_channel/num
 G_mean = G_channel/num
 B_mean = B_channel/num
 
-# Simulate noise around a pdb file. Connect values to np.random.poisson?
+# Simulate noise around a pdb file. Connect mean, std, var to np.random.poisson?
