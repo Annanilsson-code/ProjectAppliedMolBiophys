@@ -36,3 +36,26 @@ print(bins)
 plt.hist(exp_data_reshaped, bins='auto')
 plt.title('Histogram of exp data')
 plt.show()
+
+# Add noise to the projections.
+mean = 0
+std = 0.1
+
+noise_x = np.random.normal(mean, std, sum_x.shape)     # (1,200,214)
+noise_y = np.random.normal(mean, std, sum_y.shape)     # (231,1,214)
+noise_z = np.random.normal(mean, std, sum_z.shape)     # (231,200,1)
+
+noise_x_reshaped = noise_x.reshape(n,-1)    # (1, 42800)
+noise_y_reshaped = noise_y.reshape(n,-1) 
+noise_z_reshaped = noise_z.reshape(n,-1) 
+
+# Make histogram of the noise. Could do the same for y and z axes.
+np.histogram(noise_x_reshaped, bins = 'auto')
+hist, bins = np.histogram(noise_x_reshaped, bins = 'auto')
+print(hist)
+print(bins)
+
+plt.hist(noise_x_reshaped, bins='auto')
+plt.title('Histogram of exp data')
+plt.show()
+
