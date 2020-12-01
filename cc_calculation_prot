@@ -4,48 +4,19 @@ Created on Fri Nov 27 09:42:00 2020
 
 @author: Anna
 """
-import os
-import os.path
+
 from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
-from skimage import io 
 import mrcfile 
-# from scipy.misc import imread
-import imageio    # use imageio.imread instead of scipy.misc
 
-# Read the filepath and make a list of its content. 
-filepath = "C:/Users/Anna/AppliedMolBiophys/mrc_files"
-pathDir = os.listdir(filepath)  
 
-#Simple way with just a couple of images. 
+
 mrc1 = mrcfile.mmap('FoilHole_3164980_Data_3165536_3165537_20190104_1142-60848.mrcs', mode='r+')
-mrc2 = mrcfile.mmap('FoilHole_3164980_Data_3165619_3165620_20190104_1143-60849.mrcs', mode='r+') 
 
 #Put the mrc files in np arrays. 
 array1 = np.array(mrc1.data)
-array2 = np.array(mrc2.data)
 
-# Convert mrc files to png if the mean, std & var should be calculated pixelwise
+# Calculate the mean, std, var of the images
 
-
-
-
-# Calculate the mean, std, var of the images, pixelwise with regard to color channel?
-R_channel = 0
-G_channel = 0
-B_channel = 0
-
-for i in range(len(pathDir)):  
-    filename = pathDir[i]
-    # img = imageio.imread(os.path.join(filepath, filename))      #Have no images to read yet!
-    R_channel = R_channel + np.sum(img[:,:,2])
-    G_channel = G_channel + np.sum(img[:,:,1])
-    B_channel = B_channel + np.sum(img[:,:,0])
-    
-num = len(pathDir) # *size of the matrix, i.e. *300*500
-R_mean = R_channel/num
-G_mean = G_channel/num
-B_mean = B_channel/num
-
-# Simulate noise around a pdb file. Connect mean, std, var to np.random.poisson?
+# Simulate noise
