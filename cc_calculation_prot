@@ -18,7 +18,7 @@ import imageio    # use imageio.imread instead of scipy.misc
 filepath = "C:/Users/Anna/AppliedMolBiophys/mrc_files"
 pathDir = os.listdir(filepath)  
 
-# Convert mrc files to png if the mean, std & var should be calculated pixelwise! 
+# Convert mrc files to png if the mean, std & var should be calculated pixelwise
 
 
 
