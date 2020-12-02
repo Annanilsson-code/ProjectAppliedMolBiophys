@@ -32,10 +32,10 @@ hist, bins = np.histogram(exp_data_reshaped, bins = 'auto')
 print(hist)
 print(bins)
 
-    # With matplotlib
-plt.hist(exp_data_reshaped, bins='auto')
-plt.title('Histogram of exp data')
-plt.show()
+    # With matplotlib: Only works in Spyder's console. 
+#plt.hist(exp_data_reshaped.T, bins='auto')
+#plt.title('Histogram of experimental data')
+#plt.show()
 
 # Add noise to the projections.
 mean = 0
@@ -49,15 +49,14 @@ noise_x_reshaped = noise_x.reshape(n,-1)    # (1, 42800)
 noise_y_reshaped = noise_y.reshape(n,-1) 
 noise_z_reshaped = noise_z.reshape(n,-1) 
 
-# Add the noise on top of the signal.
-
 # Make histogram of the noise. Could do the same for y and z axes.
 np.histogram(noise_x_reshaped, bins = 'auto')
 hist, bins = np.histogram(noise_x_reshaped, bins = 'auto')
 print(hist)
 print(bins)
 
-plt.hist(noise_x_reshaped, bins='auto')
-plt.title('Histogram of exp data')
-plt.show()
+    # With matplotlib: Only works in Spyder's console.
+#plt.hist(noise_x_reshaped.T, bins='auto')
+#plt.title('Histogram of noise data: projection on x-axis')
+#plt.show()
 
