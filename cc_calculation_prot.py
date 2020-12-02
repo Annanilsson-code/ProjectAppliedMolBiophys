@@ -60,3 +60,12 @@ print(bins)
 #plt.title('Histogram of noise data: projection on x-axis')
 #plt.show()
 
+# Calc cc matrix and prepare infile
+cc_matrix = np.corrcoef(noise_x_reshaped, noise_y_reshaped[:, 0:42800])
+
+f = open("infile.txt", "w")
+
+for i in range(0, cc_matrix.shape[1]):
+    for j in range(0, i+1):
+        print(i+1,'\t', j+1, '\t', cc_matrix[i,j], file=f)
+
