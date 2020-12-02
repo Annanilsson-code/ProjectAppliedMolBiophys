@@ -26,7 +26,7 @@ sum_z = u.sum(axis=2, keepdims=True)    # shape = (231,200,1)
 mean = 0
 std = 0.1
 
-noise_x = np.random.normal(mean, std, sum_x.shape)     # (1,200,214)
+noise_x = np.random.normal(mean, std, sum_x.shape)   # * number to match the exp data histogram       # (1,200,214)
 noise_y = np.random.normal(mean, std, sum_y.shape)     # (231,1,214)
 noise_z = np.random.normal(mean, std, sum_z.shape)     # (231,200,1)
 
