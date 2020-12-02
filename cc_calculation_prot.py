@@ -22,22 +22,7 @@ sum_y = u.sum(axis=1, keepdims=True)    # shape = (231,1,214)
 sum_z = u.sum(axis=2, keepdims=True)    # shape = (231,200,1)
 
 
-# Make a histogram of the experimental data. 
-exp_data = np.array(mrc1.data)
-exp_data_reshaped = exp_data.reshape(n,-1)
-
-    # With numpy
-np.histogram(exp_data_reshaped, bins = 'auto')
-hist, bins = np.histogram(exp_data_reshaped, bins = 'auto')
-print(hist)
-print(bins)
-
-    # With matplotlib: Only works in Spyder's console. 
-#plt.hist(exp_data_reshaped.T, bins='auto')
-#plt.title('Histogram of experimental data')
-#plt.show()
-
-# Add noise to the projections.
+# Create the noise
 mean = 0
 std = 0.1
 
@@ -49,16 +34,24 @@ noise_x_reshaped = noise_x.reshape(n,-1)    # (1, 42800)
 noise_y_reshaped = noise_y.reshape(n,-1) 
 noise_z_reshaped = noise_z.reshape(n,-1) 
 
-# Make histogram of the noise. Could do the same for y and z axes.
-np.histogram(noise_x_reshaped, bins = 'auto')
-hist, bins = np.histogram(noise_x_reshaped, bins = 'auto')
-print(hist)
-print(bins)
 
-    # With matplotlib: Only works in Spyder's console.
-#plt.hist(noise_x_reshaped.T, bins='auto')
-#plt.title('Histogram of noise data: projection on x-axis')
-#plt.show()
+# Add the noise to the data
+final_x = noise_x + u
+final_y = noise_y + u
+
+
+# Create the histograms and superimpose them (only works in Spyder's console)
+exp_data = np.array(mrc1.data)
+exp_data_reshaped = exp_data.reshape(n,-1)
+final_x_reshaped = final_x.reshape(n,-1)
+final_y_reshaped = final_y.reshape(n,-1)
+
+plt.figure()
+plt.hist(exp_data_reshaped.T, bins='auto', alpha=0.5, label="data1")
+plt.hist(final_x_reshaped.T, bins='auto', alpha=0.5, label="data2")
+plt.title('Histogram of noise and exp data')
+plt.legend(loc='upper right')
+
 
 # Calc cc matrix and prepare infile
 cc_matrix = np.corrcoef(noise_x_reshaped, noise_y_reshaped[:, 0:42800])
