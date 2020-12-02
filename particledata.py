@@ -9,12 +9,10 @@ Created on Tue Nov 24 16:49:52 2020
 import numpy as np
 import mrcfile 
 from matplotlib import pyplot as plt
-from skimage import io 
 
 # import electron density map from pdb model  
 with mrcfile.open('6yhs3.mrc', 'r+') as mrc: 
     arr_6yhs = np.array(mrc.data) 
-    del mrc
 
 # simulate projections by summing along an axis
 size = np.zeros((200,200))
@@ -37,9 +35,9 @@ for i in range(n):
 np.save('classes.npy',classes)
 
 #import experimental data for statistical noise distrubution 
-with mrcfile.open('FoilHole_3164980_Data_3165536_3165537_20190104_1142-60848.mrcs', 'r+') as mrc:
-    arr_exp = np.array(mrc.data[1])
-reshape_exp = arr_exp.reshape((-1,1))
+# with mrcfile.open('FoilHole_3164980_Data_3165536_3165537_20190104_1142-60848.mrcs', 'r+') as mrc:
+#     arr_exp = np.array(mrc.data[1])
+# reshape_exp = arr_exp.reshape((-1,1))
 
 # compare noise distrubution 
 # oneprojnoise = noisy_proj[60]
@@ -60,3 +58,4 @@ for i in range(0, cc_matrix.shape[1]):
     for j in range(0, i+1):
         file = open("cc_file.txt", "a")
         file.write("%s % s %.5f" % (i+1, j+1, cc_matrix[i,j]) + '\n')
+     
