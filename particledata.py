@@ -35,21 +35,24 @@ for i in range(n):
 np.save('classes.npy',classes)
 
 #import experimental data for statistical noise distrubution 
-# with mrcfile.open('FoilHole_3164980_Data_3165536_3165537_20190104_1142-60848.mrcs', 'r+') as mrc:
-#     arr_exp = np.array(mrc.data[1])
-# reshape_exp = arr_exp.reshape((-1,1))
+with mrcfile.open('FoilHole_3164980_Data_3165536_3165537_20190104_1142-60848.mrcs', 'r+') as mrc:
+     arr_exp = np.array(mrc.data[1])
+reshape_exp = arr_exp.reshape((-1,1))
 
 # compare noise distrubution 
-# oneprojnoise = noisy_proj[60]
-# reshape_proj = oneprojnoise.reshape(-1,1)
+oneprojnoise = noisy_proj[60]
+reshape_proj = oneprojnoise.reshape(-1,1)
 # plt.hist([reshape_exp, reshape_proj], bins='auto', stacked='true')
-# plt.figure()
-# plt.imshow(oneprojnoise)
-# plt.figure()
-# plt.imshow(arr_exp)
-# plt.figure()
-# plt.imshow(x_view)
-# plt.show()
+plt.hist(reshape_exp, bins='auto', alpha=0.5, label="Exp")
+plt.hist(reshape_proj, bins='auto', alpha=0.5, label="Noise", stacked='true')
+
+plt.figure()
+plt.imshow(oneprojnoise)
+plt.figure()
+plt.imshow(arr_exp)
+plt.figure()
+plt.imshow(x_view)
+plt.show()
 
 # create correlation coeffisients and infile 
 cc_matrix = np.corrcoef(noisy_proj.reshape(n,-1))
