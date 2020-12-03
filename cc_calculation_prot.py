@@ -52,16 +52,12 @@ classes = np.zeros((n))
 mean = 0
 std = 0.1
 
-# Måste ha EN noisy_proj ju. Eller kan vi lägga samma brus på båda projektionerna?
-# Det går väl inte, då blir det ju
-
 for i in range(n):
     c = np.random.randint(0, nclasses)
     gaussian = np.random.normal(mean, std, proj[c].shape)
     noisy_proj[i] = proj[c]*0.005 + gaussian 
     classes[i] = c
-
-# classes = np.concatenate(classes1, classes2)        
+    
 np.save('classes.npy',classes)
 
 # Calculate cc_matrix and print to infile
@@ -69,10 +65,6 @@ cc_matrix = np.corrcoef(noisy_proj.reshape(n,-1))    #(200,200)
 
 
 file = open("infile.txt", "w")
-
-# for i in range(0, cc_matrix.shape[1]):
-#     for j in range(0, i+1):
-#             print(i+1,'\t', j+1, '\t', cc_matrix[i,j], file=f)
             
 for i in range(0, cc_matrix.shape[1]):
     for j in range(0, i+1):
