@@ -30,7 +30,9 @@ noisy_proj = np.zeros((n, size.shape[0], size.shape[1]))
 classes = np.zeros((n))
 for i in range(n):
     c = np.random.randint(0, nclasses)
-    noisy_proj[i] = np.random.normal(proj[c]*0.01)
+    # noisy_proj[i] = np.random.normal(proj[c]*0.01)
+    gaussian = np.random.normal()
+    noisy_proj[i] = proj[c] + gaussian
     classes[i] = c
 np.save('classes.npy',classes)
 
