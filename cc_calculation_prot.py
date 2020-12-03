@@ -12,30 +12,30 @@ import mrcfile
 
 # Import electron density maps (4o0p and 4o01)
 with mrcfile.open('4o0p_aligned.mrc', 'r+') as mrc: 
-    prot1 = np.array(mrc.data)     # (231,200,214)
+    prot1 = np.array(mrc.data)     # (103,107,97)
     del mrc
     
 with mrcfile.open('4o01_aligned.mrc', 'r+') as mrc1: 
-    prot2 = np.array(mrc1.data)     # (231,200,214)
+    prot2 = np.array(mrc1.data)     # (156,124,125)
     del mrc1
 
 # Matrix to add noise and protein data
-prot_noise = np.zeros((90,90)) 
+prot_noise = np.zeros((97,97))
 
 # Calculate projections
-sum_x = prot1.sum(axis=0)    # shape = (1,200,214)
-sum_x = sum_x[tuple(slice(0,n) for n in prot_noise.shape)] 
-sum_y = prot1.sum(axis=1)    # shape = (231,1,214)
-sum_y = sum_y[tuple(slice(0,n) for n in prot_noise.shape)]
-sum_z = prot1.sum(axis=2)    # shape = (231,200,1)
-sum_z = sum_z[tuple(slice(0,n) for n in prot_noise.shape)]
+sum_x = prot1.sum(axis=0)    
+sum_x = sum_x[tuple(slice(0,n) for n in prot_noise.shape)]   # (103,97)
+sum_y = prot1.sum(axis=1)    
+sum_y = sum_y[tuple(slice(0,n) for n in prot_noise.shape)]   # (103,97)
+sum_z = prot1.sum(axis=2)    
+sum_z = sum_z[tuple(slice(0,n) for n in prot_noise.shape)]   # (103,107)
 
-sum_x2 = prot2.sum(axis=0)    # shape = (1,200,214)
-sum_x2 = sum_x2[tuple(slice(0,n) for n in prot_noise.shape)] 
-sum_y2 = prot2.sum(axis=1)    # shape = (231,1,214)
-sum_y2 = sum_y2[tuple(slice(0,n) for n in prot_noise.shape)]
-sum_z2 = prot2.sum(axis=2)    # shape = (231,200,1)
-sum_z2 = sum_z2[tuple(slice(0,n) for n in prot_noise.shape)]
+sum_x2 = prot2.sum(axis=0)    
+sum_x2 = sum_x2[tuple(slice(0,n) for n in prot_noise.shape)] # (103,107)
+sum_y2 = prot2.sum(axis=1)    
+sum_y2 = sum_y2[tuple(slice(0,n) for n in prot_noise.shape)] # (103,107)
+sum_z2 = prot2.sum(axis=2)    
+sum_z2 = sum_z2[tuple(slice(0,n) for n in prot_noise.shape)] # (103,107)
 
 # Calculate the noise
 n=100 
