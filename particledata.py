@@ -25,14 +25,15 @@ x_view = x_view[tuple(slice(0,n) for n in size.shape)]
 
 n = 1000
 nclasses = 3
+mean = 0
+std = 0.1
 proj = [x_view, y_view, z_view]
 noisy_proj = np.zeros((n, size.shape[0], size.shape[1]))
 classes = np.zeros((n))
 for i in range(n):
     c = np.random.randint(0, nclasses)
-    # noisy_proj[i] = np.random.normal(proj[c]*0.01)
-    gaussian = np.random.normal()
-    noisy_proj[i] = proj[c] + gaussian
+    gaussian = np.random.normal(mean, std, proj[c].shape)*15
+    noisy_proj[i] = (proj[c]*0.001) + gaussian
     classes[i] = c
 np.save('classes.npy',classes)
 
@@ -44,7 +45,6 @@ reshape_exp = arr_exp.reshape((-1,1))
 # compare noise distrubution 
 oneprojnoise = noisy_proj[60]
 reshape_proj = oneprojnoise.reshape(-1,1)
-# plt.hist([reshape_exp, reshape_proj], bins='auto', stacked='true')
 plt.hist(reshape_exp, bins='auto', alpha=0.5, label="Exp")
 plt.hist(reshape_proj, bins='auto', alpha=0.5, label="Noise", stacked='true')
 
