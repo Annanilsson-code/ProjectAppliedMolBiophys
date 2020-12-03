@@ -4,14 +4,13 @@ Created on Fri Nov 27 09:42:00 2020
 
 @author: Anna
 """
-# Comparing two different proteins
+# Comparing two different proteins (4o0p.pdb and 4o01.pdb)
 
 import matplotlib.pyplot as plt
 import numpy as np 
 import mrcfile 
 
 # Import electron density maps (4o0p and 4o01)
-
 with mrcfile.open('4o0p_aligned.mrc', 'r+') as mrc: 
     prot1 = np.array(mrc.data)     # (231,200,214)
     del mrc
@@ -47,8 +46,6 @@ proj = [sum_x, sum_y, sum_z, sum_x2, sum_y2, sum_z2]
 noisy_proj = np.zeros((n, prot_noise.shape[0], prot_noise.shape[1]))
 
 classes = np.zeros((n))
-# classes1 = np.zeros((n))
-# classes2 = np.zeros((n))
 mean = 0
 std = 0.1
 
