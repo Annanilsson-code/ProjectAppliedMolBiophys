@@ -15,7 +15,7 @@ import pandas as pd
 
 # Import electron density map (6yhs)
 with mrcfile.open('6yhs.mrc', 'r+') as mrc: 
-    prot1 = np.array(mrc.data)     # (231,200,214)
+    prot1 = np.array(mrc.data) 
     del mrc
 
 
@@ -23,11 +23,11 @@ with mrcfile.open('6yhs.mrc', 'r+') as mrc:
 prot_noise = np.zeros((200,200)) 
 
 # Calculate projections
-sum_x = prot1.sum(axis=0)    # shape = (1,200,214)
+sum_x = prot1.sum(axis=0)   
 sum_x = sum_x[tuple(slice(0,n) for n in prot_noise.shape)] 
-sum_y = prot1.sum(axis=1)    # shape = (231,1,214)
+sum_y = prot1.sum(axis=1)    
 sum_y = sum_y[tuple(slice(0,n) for n in prot_noise.shape)]
-sum_z = prot1.sum(axis=2)    # shape = (231,200,1)
+sum_z = prot1.sum(axis=2)  
 sum_z = sum_z[tuple(slice(0,n) for n in prot_noise.shape)]
 
 
@@ -51,7 +51,7 @@ np.save('classes.npy',classes)
 
 
 # Perform PCA on the data
-data = noisy_proj.reshape(n,-1)     # (100,40000)
+data = noisy_proj.reshape(n,-1)   # (n,40000)
 from sklearn.decomposition import PCA
 
 def pca_components(data, pc_count = None):
