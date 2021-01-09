@@ -65,29 +65,3 @@ for i in range(0, cc_matrix.shape[1]):
         file = open("infile.txt", "a")
         file.write("%s % s %.5f" % (i+1, j+1, cc_matrix[i,j]) + '\n')
 
-
-# Perform PCA on the data.
-data = noisy_images.reshape(n,-1)
-
-from sklearn.decomposition import PCA
-
-def pca_components(data, pc_count = None):
-    return PCA(n_components = 2).fit_transform(data)
-
-vectors = pca_components(data)   
-
-pca1= vectors[:,0]
-pca2 = vectors[:,1]
-
-# Plot in scatter plot
-plt.figure(num=1)
-fig, ax = plt.subplots()
-scatter = ax.scatter(pca1, pca2, c=classes)
-
-legend1 = ax.legend(*scatter.legend_elements(),
-                    loc="upper left", title="Classes")
-ax.add_artist(legend1)
-plt.title('PCA: squares and rectangles, 100 replicas, *0.01')
-plt.xlabel('Principal component 1')
-plt.ylabel('Principal component 2')
-plt.show()
